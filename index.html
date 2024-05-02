@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visualización de Datos de Encuesta</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <nav class="row navbar navbar-expand-lg navbar-dark menu shadow fixed-top gap-5">
+    <div class="container col-sm-3">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo2.png" alt="logo image" class="img-fluid" width="100">
+      </a>
+
+    </div>
+    <div class="col-sm-8 align-items-center text-white">
+
+    </div>
+  </nav>
+
+
+
+  <section id="home" class="intro-section">
+    <div class="container">
+      <div class="row align-items-center text-white">
+        <h2 id="titulo"><style>h2 {text-align: center;}</style> Encuesta de Consumo de Alcohol</h2>
+
+        <div id="filters"><br><br>
+          <select id="question-filter" class="form-control mb-2">
+            <option value="">Filtrar por pregunta</option>
+            <option
+              value="¿Cuántas bebidas alcohólicas consumes en una semana aproximadamente? Introduce un valor numérico">
+              ¿Cuántas bebidas alcohólicas consumes en una semana aproximadamente?</option>
+            <option value="¿Cuántas cervezas consumes en una semana aproximadamente? Introduce un valor numérico">
+              ¿Cuántas cervezas consumes en una semana aproximadamente?</option>
+            <option
+              value="¿Cuántas bebidas alcohólicas consumes aproximadamente en un fin de semana? Introduce un valor numérico.">
+              ¿Cuántas bebidas alcohólicas consumes aproximadamente en un fin de semana?</option>
+            <option
+              value="¿Cuántas bebidas destiladas consumes aproximadamente en una semana (whisky, vodka, ron, ginebra, etc.)? Introduce un valor numérico">
+              ¿Cuántas bebidas destiladas consumes aproximadamente en una semana?</option>
+            <option
+              value="¿Cuántos vasos de vino consumes aproximadamente en una semana ? Introduce un valor numérico.">
+              ¿Cuántos vasos de vino consumes aproximadamente en una semana?</option>
+            <option
+              value="¿Cuántas veces a lo largo del año dirías que has perdido el control debido al alcohol? Introduce un valor numérico.">
+              ¿Cuántas veces a lo largo del año dirías que has perdido el control debido al alcohol?</option>
+          </select>
+          <select id="age-filter" class="form-control mb-2">
+            <option value="">Filtrar por edad</option>
+            <option value="18-25">18-25</option>
+            <option value="26-35">26-35</option>
+            <option value="36-45">36-45</option>
+            <option value="46-55">46-55</option>
+            <option value="56-65">56-65</option>
+            <option value="66+">66+</option>
+          </select>
+          <select id="sex-filter" class="form-control mb-2">
+            <option value="">Filtrar por sexo</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+          </select>
+          
+        </div>
+
+        <div class="col-md-6 intros text-end">
+
+        </div>
+      </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#ffffff" fill-opacity="1"
+        d="M0,160L48,176C96,192,192,224,288,208C384,192,480,128,576,133.3C672,139,768,213,864,202.7C960,192,1056,96,1152,74.7C1248,53,1344,107,1392,133.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+      </path>
+    </svg>
+  </section>
+
+
+
+  <section id="campanies" class="campanies">
+    <div class="container">
+      <canvas id="myChart" width="700" height="300"></canvas>
+
+
+    </div>
+  </section>
+
+
+
+  <section id="testimonials" class="testimonials">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#fff" fill-opacity="1"
+        d="M0,96L48,128C96,160,192,224,288,213.3C384,203,480,117,576,117.3C672,117,768,203,864,202.7C960,203,1056,117,1152,117.3C1248,117,1344,203,1392,245.3L1440,288L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+      </path>
+    </svg>
+    <div class="container">
+      <div class="row text-center ">
+
+        <table class="table table-striped mt-3">
+          <thead >
+            <tr>
+              <th>Edad</th>
+              <th>Cantidad totalizada</th>
+            </tr>
+          </thead>
+          <tbody  id="survey-results">
+
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- START THE CAROUSEL CONTENT  -->
+      <div class="row align-items-center">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
+          <div class="text-center">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#fff" fill-opacity="1"
+        d="M0,96L48,128C96,160,192,224,288,213.3C384,203,480,117,576,117.3C672,117,768,203,864,202.7C960,203,1056,117,1152,117.3C1248,117,1344,203,1392,245.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+      </path>
+    </svg>
+  </section>
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
+
+    <!-- START THE COPYRIGHT INFO  -->
+    <div class="footer-bottom pt-5 pb-5">
+      <div class="container">
+        <div class="row text-center text-white">
+          <div class="col-12">
+            <div class="footer-bottom__copyright">
+              &COPY; Copyright 2024 <a href="#">Company</a> | Created by <a href="https://www.linkedin.com/in/alexis-camero-hernandez/"
+                target="_blank">Alexis Camero</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON  -->
+  <a href="#" class="shadow btn-primary rounded-circle back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <script>
+
+
+
+
+    let currentChart = null; // Variable global para almacenar el gráfico actual
+
+    // Evento de carga del documento
+    document.addEventListener('DOMContentLoaded', function () {
+      // Eventos de cambio para los filtros
+      document.getElementById('age-filter').addEventListener('change', loadSurveyData);
+      document.getElementById('sex-filter').addEventListener('change', loadSurveyData);
+      document.getElementById('question-filter').addEventListener('change', loadSurveyData);
+
+      // Cargar los datos al cargar la página
+      loadSurveyData();
+    });
+
+    function loadSurveyData() {
+      fetch('consumoAlcohol.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al cargar el archivo JSON');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Obtén los valores de los filtros
+          const ageFilter = document.getElementById('age-filter').value;
+          const sexFilter = document.getElementById('sex-filter').value;
+          const questionFilter = document.getElementById('question-filter').value;
+
+          console.log(data);
+
+          // Filtrar los datos según la edad, el sexo y la pregunta seleccionadas
+          let filteredData = data;
+          if (ageFilter) {
+            filteredData = filteredData.filter(survey => {
+              const age = survey['¿Qué edad tienes? Introduce un valor numérico.'];
+              if (ageFilter === '18-25') {
+                return age >= 18 && age <= 25;
+              } else if (ageFilter === '26-35') {
+                return age >= 26 && age <= 35;
+              } else if (ageFilter === '36-45') {
+                return age >= 36 && age <= 45;
+              } else if (ageFilter === '46-55') {
+                return age >= 46 && age <= 55;
+              } else if (ageFilter === '56-65') {
+                return age >= 56 && age <= 65;
+              } else {
+                return age >= 66;
+              }
+            });
+
+          }
+
+          if (sexFilter) {
+            filteredData = filteredData.filter(survey => survey['¿Tu sexo?'] === sexFilter);
+          }
+
+          if (questionFilter) {
+            filteredData = filteredData.filter(survey => survey[questionFilter] !== undefined);
+          }
+
+          // Agrupar los resultados según la edad seleccionada
+          const groupedData = {};
+          filteredData.forEach(survey => {
+            const age = survey['¿Qué edad tienes? Introduce un valor numérico.'];
+            const questionValue = parseFloat(survey[questionFilter]);
+
+
+            console.log(groupedData);
+
+            // Inicializar el grupo si aún no existe
+            if (!groupedData[age]) {
+              groupedData[age] = {
+                totalValue: 0
+              };
+            }
+
+            // Verifica que questionValue sea un número válido
+            if (!isNaN(questionValue)) {
+              groupedData[age].totalValue += questionValue;
+            }
+          });
+
+          // Convertir los datos agrupados a una matriz para mostrar en la tabla
+          const groupedDataArray = Object.keys(groupedData).map(age => ({
+            age,
+            totalValue: groupedData[age].totalValue.toFixed(2)
+          }));
+
+          console.log(groupedDataArray);
+
+          // Mostrar los datos agrupados en la tabla
+          const resultsContainer = document.getElementById('survey-results');
+          resultsContainer.innerHTML = '';
+          groupedDataArray.forEach(group => {
+            const row = `<tr>
+                <td>${group.age}</td>
+                <td>${group.totalValue}</td>
+            </tr>`;
+            resultsContainer.innerHTML += row;
+          });
+
+          // Crear gráficos con los datos agrupados
+          createChart(groupedDataArray);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    function createChart(groupedDataArray) {
+      // Verifica si ya hay un gráfico existente y destrúyelo
+      if (currentChart) {
+        currentChart.destroy();
+      }
+
+      // Obtener el contexto del gráfico
+      const ctx = document.getElementById('myChart').getContext('2d');
+
+      // Crear las etiquetas para el eje x del gráfico usando las edades de la tabla
+      const labels = groupedDataArray.map(group => `Edad ${group.age}`);
+
+      // Crear los datos para el eje y del gráfico usando los valores totalizados de la tabla
+      const dataValues = groupedDataArray.map(group => parseFloat(group.totalValue));
+
+      // Configuración de los datos del gráfico
+      const chartData = {
+        labels,
+        datasets: [
+          {
+            label: 'Cantidad totalizada',
+            data: dataValues,
+            backgroundColor: '#007bff'
+          }
+        ]
+      };
+
+      // Crear el gráfico de barras utilizando Chart.js
+      currentChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>
